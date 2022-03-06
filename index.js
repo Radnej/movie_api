@@ -4,6 +4,17 @@ const app = express();
 // Import Morgan middleware library
 const morgan = require('morgan');
 
+// Logging with Morgen
+morgan = require('morgan');
+
+const app = express();
+
+app.use(morgan('common'));
+
+app.get('/', (req, res) => {
+  res.send('Welcome to myFlix!');
+});
+
 // Create array of objects that holds top 10 movies
 let topMovies = [
     {
