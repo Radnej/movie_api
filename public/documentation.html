@@ -13,5 +13,187 @@
       directors, and genres. Users will be able to sign up, update their personal information,<br>
       and create a list of their favorite movies.
     </p>
+
+<table class="table table-hover align-middle">
+  <thead>
+    <tr>
+      <th scope="col">Business Logic</th>
+      <th scope="col">URL</th>
+      <th scope="col">HTTP Method</th>
+      <th scope="col">Query parameters</th>
+      <th scope="col">Request body data format</th>
+      <th scope="col">Response body data format</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Return a list of ALL movies to the user</td>
+      <td>/movies</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>None</td>
+      <td>A JSON object holding data about all movies</td>
+    </tr>
+    <tr>
+      <td>Return data about a single movie by title to the user</td>
+      <td>/movies/[title]</td>
+      <td>GET</td>
+      <td>:title</td>
+      <td>None</td>
+      <td>A JSON object holding data about the selected movie containing description, genre, director and img URL. Example: 
+        <pre>
+          <code>
+{
+  name: '', 
+  year: '',
+  genre: {
+    name: '',
+    description: ''
+  } 
+  Director: {
+    name: '', 
+    bio: '',
+    birth: ''
+  },
+  imageURL: {
+
+  }
+  featured: ''
+}
+          </code>
+        </pre>
+      </td>
+    </tr>
+    <tr>
+      <td>Return data about a genre (description) by name/title (e.g., “Thriller”)</td>
+      <td>/movies/genres/[genre]</td>
+      <td>GET</td>
+      <td>:genre</td>
+      <td>None</td>
+      <td>A JSON object holding data about the selected genre. Example:
+        <pre>
+          <code>
+{ 
+  name: 'Comedy', 
+  description: '', 
+}
+          </code>
+        </pre>
+      </td>
+    </tr>
+    <tr>
+      <td>Return data about a director (bio, birth year) by name</td>
+      <td>/movies/directors/[name]</td>
+      <td>GET</td>
+      <td>:name</td>
+      <td>None</td>
+      <td>A JSON object holding data about the selected director. Example: 
+        <pre>
+          <code>
+{ 
+  name: 'Paul Thomas Anderson', 
+  birth: '1970', 
+  bio: 'Anderson was born in 1970. He was one of the first of the "video store" generation of film-makers. His father was the first man on his block to own a V.C.R., and from a very early age Anderson had an infinite number of titles available to him. While film-makers like Spielberg cut their teeth making 8 mm films, Anderson cut his teeth shooting films on video and editing them from V.C.R. to V.C.R.'
+}
+          </code>
+        </pre>
+      </td>
+    </tr>
+    <tr>
+      <td>Allow new users to register</td>
+      <td>/users</td>
+      <td>POST</td>
+      <td>None</td>
+      <td>A JSON object holding data about the user to add. Example: 
+        <pre>
+          <code>
+{ 
+  "username": "Sara", 
+  "email": "snejat@gmail.com", 
+  "password": "Sn@rt2022!"
+  "birthday": "24/04/1988", 
+  "favorites": [
+    "Licorice Pizza", "Scream"
+  ] 
+}
+          </code>
+        </pre>
+      </td>
+      <td>A JSON object holding data about added user including ID. Example:
+        <pre>
+          <code>
+{ 
+  id: '1',
+  "username": "Sara", 
+  "email": "snejat@gmail.com", 
+  "password": "Sn@rt2022!"
+  "birthday": "24/04/1988", 
+  "favorites": [
+    "Licorice Pizza", "Scream"
+  ] 
+}
+          </code>
+        </pre>
+      </td>
+    </tr>
+    <tr>
+      <td>Allow users to update their user info (username)</td>
+      <td>/users/[username]</td>
+      <td>PUT</td>
+      <td>:username</td>
+      <td> A JSON object holding the new username. Example:
+        <pre>
+          <code>
+{ 
+  "username": "Mary"
+}
+          </code>
+        </pre>
+      </td>
+      <td>A JSON object with the updated user profile. Example:
+        <pre>
+          <code>
+{ 
+  id: '1',
+  username: 'Mary', 
+  email: 'mary.rahmanpour@gmail.com', 
+  password: 'ihatelemons'
+  birthday: '12/09/1984', 
+  favorites: [
+    'Bee Movie', 'Parent Trap'
+  ] 
+}
+          </code>
+        </pre>
+      </td>
+    </tr>
+    <tr>
+      <td>Allow users to add a movie to their list of favorites</td>
+      <td>/users/[username]/[movie]</td>
+      <td>POST</td>
+      <td>:username, :movie</td>
+      <td>None</td>
+      <td>A text message indicating the movie was added</td>
+    </tr>
+    <tr>
+      <td>Allow users to remove a movie from their list of favorites</td>
+      <td>/users/[username]/[movie]</td>
+      <td>DELETE</td>
+      <td>:username, :movie</td>
+      <td>None</td>
+      <td>A text message indicating the movie was deleted</td>
+    </tr>
+    <tr>
+      <td>Allow existing users to deregister</td>
+      <td>/users/[username]</td>
+      <td>DELETE</td>
+      <td>:username</td>
+      <td>None</td>
+      <td>A message indicating the user was deregistered</td>
+    </tr>
+  </tbody>
+</table>
 </body>
 </html>
+
+
