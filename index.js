@@ -84,7 +84,7 @@ app.get('/movies/:name', (req, res) => {
 });
 
 //READ Movies Genre
-app.get('/movies/genre/:genre', (req, res) => {
+app.get('/movies/name/:name', (req, res) => {
   res.send('Show movie genre');
 });
 
