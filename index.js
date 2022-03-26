@@ -28,7 +28,7 @@ let movies = [
 },
   director: { 
     name:'Paul Thomas Anderson',
-    bio:'Anderson was born in 1970. He was one of the first of the "video store" generation of film-makers. His father was the first man on his block to own a V.C.R., and from a very early age Anderson had an infinite number of titles available to him. While film-makers like Spielberg cut their teeth making 8 mm films, Anderson cut his teeth shooting films on video and editing them from V.C.R. to V.C.R.',
+    bio:'Anderson was born in 1970. He was one of the first of the "video store" generation of film-makers.',
     birth:1970
   },
   imageURL:'https://www.imdb.com/title/tt11271038/?ref_=adv_li_i',
@@ -53,8 +53,9 @@ let movies = [
 
 //Return list of ALL movies to the user
 app.get('/movies', (req, res) => {
-  res.send('return list of movies');
+  res.send('Show director name');
 });
+
 
 //CREAT user in the app
 app.post('/users', (req, res) => {
