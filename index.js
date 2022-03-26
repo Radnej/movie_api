@@ -51,6 +51,11 @@ let movies = [
 }
 ];
 
+//Return list of ALL movies to the user
+app.get('/movies', (req, res) => {
+  res.send('return list of movies');
+});
+
 //CREAT user in the app
 app.post('/users', (req, res) => {
   res.send('Add user');
@@ -84,7 +89,7 @@ app.get('/movies/:name', (req, res) => {
 });
 
 //READ Movies Genre
-app.get('/movies/name/:name', (req, res) => {
+app.get('/movies/geners/:name', (req, res) => {
   res.send('Show movie genre');
 });
 
