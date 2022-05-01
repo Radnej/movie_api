@@ -10,8 +10,6 @@ const Models = require('./models.js');
 //mongoose models
 const Movies = Models.Movie;
 const Users = Models.User;
-const Genres = Models.Genre;
-const Directors = Models.Director;
 
 //connect to MongoDB
 
@@ -21,6 +19,8 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(morgan('common'));
 
 //Get all movies
 app.get('/movies', (req, res) => {
@@ -123,32 +123,6 @@ app.delete('/users/:Username/movies/:MovieID', (req, res) => {
   });
 });
 
-//Remove/deregister a user.
-app.post('/users', (req, res) => {
-  Users.findOne({ Username: req.body.Username })
-    .then((user) => {
-      if (user) {
-        return res.status(400).send(req.body.Username + 'already exists');
-      } else {
-        Users
-          .create({
-            Username: req.body.Username,
-            Password: req.body.Password,
-            Email: req.body.Email,
-            Birthday: req.body.Birthday
-          })
-          .then((user) =>{res.status(201).json(user) })
-        .catch((error) => {
-          console.error(error);
-          res.status(500).send('Error: ' + error);
-        })
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send('Error: ' + error);
-    });
-});
 
 // Delete a user by username
 app.delete('/users/:Username', (req, res) => {
@@ -173,8 +147,6 @@ app.use((err, req, res, next) => {
 });
 
 // Serve static content for the app from the 'public' directory
-app.use(morgan('common'));
-app.use(express.json());
 app.use(express.static('public'));
 
   // Listen to port 8080
