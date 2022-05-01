@@ -22,11 +22,6 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// default text response when at /
-app.get('/', (req, res) => {
-  res.send('Welcome to MyFlix!');
-});
-
 //Get all movies
 app.get('/movies', (req, res) => {
   Movies.find()
@@ -39,31 +34,7 @@ app.get('/movies', (req, res) => {
   });
 });
 
-// Get all users
-app.get('/users', function (req, res) {
-  Users.find()
-  .then(function (users) {
-    res.status(201).json(users);
-  })
-  .catch(function (err) {
-    console.error(err);
-    res.status(500).send('Error:' + err);
-  });
-});
-
-// Get a user by username
-app.get('/users/:Username', (req, res) => {
-  Users.findOne({ Username: req.params.Username })
-    .then((user) => {
-      res.json(user);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    });
-});
-
-//(Read) responds with a json of the specific movie asked for title
+//Get a single movie
 app.get('/movies/:Title', (req, res) => {
   Movies.findOne({ Title: req.params.Title})
   .then((movie) => {
@@ -75,7 +46,7 @@ app.get('/movies/:Title', (req, res) => {
   });
 });
 
-//(Read) responds with a json of the specific movie asked for genre
+//Get a genre
 app.get('/genre/:Name', (req, res) => {
   Movies.findOne({ 'Genre.Name': req.params.Name })
       .then((movie) => {
@@ -87,31 +58,40 @@ app.get('/genre/:Name', (req, res) => {
       });
 });
 
-//Update change username
-app.put('/users/:Username', (req, res) => {
-  Users.findOneAndUpdate(
-    { Username: req.params.Username },
-    {
-      $set: {
-        Username: req.body.Username,
-        Password: req.body.Password,
-        Email: req.body.Email,
-        Birthday: req.body.Birthday,
-      },
-    },
-    { new: true},
-    (err, updatedUser) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send('Error: ${err}');
-      } else {
-        res.json(updatedUser);
-      }
-    }
-  )
+// Get a director
+app.get('/director/:Name', (req, res) => {
+  Movies.findOne({ 'Director.Name': req.params.Name })
+      .then((movie) => {
+          res.json(movie.Director);
+      })
+      .catch((err) => {
+          console.error(err);
+          res.status(500).send('Error: ' + err);
+      });
 });
 
-// adds a movie to a users list of favorite movies
+//Update a user by username
+app.put('/users/:Username', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
+    {
+      Username: req.body.Username,
+      Password: req.body.Password,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday
+    }
+  },
+  { new: true }, // This line makes sure that the updated document is returned
+  (err, updatedUser) => {
+    if(err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
+});
+
+// Add movie from user's favorite movies list
 app.post('/users/:Username/movies/:MovieID', (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, 
       { $push: { FavoriteMovies: req.params.MovieID }
@@ -127,31 +107,23 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
   });
 });
 
-// gets information about a director
-app.get('/director/:Name', (req, res) => {
-  Movies.findOne({ 'Director.Name': req.params.Name })
-      .then((movie) => {
-          res.json(movie.Director);
-      })
-      .catch((err) => {
+// Remove movie from user's favorite movies list
+app.delete('/users/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, 
+      { $pull: { FavoriteMovies: req.params.MovieID }
+  },
+  { new: true }, // this line makes sure that the updated document is returned
+  (err, updatedUser) => {
+      if (err) {
           console.error(err);
           res.status(500).send('Error: ' + err);
-      });
-});
-
-//(Read) responds with a json of the specific movie asked for director
-app.get('/movies/directors/:Name', (req, res) => {
-  Directors.findOne({ Name: req.params.Name })
-  .then((director) => {
-    res.json(director);
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send('Error: ' + err);
+      } else {
+          res.json(updatedUser);
+      }
   });
 });
 
-//Add a user and register
+//Remove/deregister a user.
 app.post('/users', (req, res) => {
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
@@ -178,70 +150,16 @@ app.post('/users', (req, res) => {
     });
 });
 
-//update
-app.put('/users/:Username', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
-    {
-      Username: req.body.Username,
-      Password: req.body.Password,
-      Email: req.body.Email,
-      Birthday: req.body.Birthday
-    }
-  },
-  { new: true }, // This line makes sure that the updated document is returned
-  (err, updatedUser) => {
-    if(err) {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    } else {
-      res.json(updatedUser);
-    }
-  });
-});
-
-// Delete a user by username
-app.delete('/users/:Username', (req, res) => {
-  Users.findOneAndRemove({ Username: req.params.Username })
-    .then((user) => {
-      if (!user) {
-        res.status(400).send(req.params.Username + ' was not found');
-      } else {
-        res.status(200).send(req.params.Username + ' was deleted.');
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    });
-});
-
-// deletes a movie from a users list of favorite movies
-app.delete('/users/:Username/movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username }, 
-      { $pull: { FavoriteMovies: req.params.MovieID }
-  },
-  { new: true }, // this line makes sure that the updated document is returned
-  (err, updatedUser) => {
-      if (err) {
-          console.error(err);
-          res.status(500).send('Error: ' + err);
-      } else {
-          res.json(updatedUser);
-      }
-  });
+// Error handling (middleware)
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 
 // Serve static content for the app from the 'public' directory
 app.use(morgan('common'));
 app.use(express.json());
 app.use(express.static('public'));
-
-// Error handling (middleware)
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-  });
-  
 
   // Listen to port 8080
 app.listen(8080, () => {
