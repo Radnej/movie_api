@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 let movieSchema = mongoose.Schema({
-    Title: {type: String, required: true},
+    Name: {type: String, required: true},
     Description: { type: String, require: true},
     Genre: {
         Name: String,
-        Description: String
+        Description: String,
     },
     Director: {
         Name: String,
@@ -12,7 +12,7 @@ let movieSchema = mongoose.Schema({
     },
     Actors: [String],
     ImagePath: String,
-    Featured: Boolean
+    Featured: Boolean,
 });
 
 let userSchema = mongoose.Schema({
@@ -28,5 +28,6 @@ let User = mongoose.model( 'User', userSchema);
 
 module.exports.Movie = Movie;
 module.exports.User = User;
+
 
 

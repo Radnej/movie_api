@@ -32,35 +32,52 @@
       <td>GET</td>
       <td>None</td>
       <td>None</td>
-      <td>An array of all movies objects</td>
+      <td>Returns JSON Object with a list of all top movies 
+        <pre>
+          <code>
+        Title: String,
+        Director: String,
+        Stars: [String],
+        Genre: {
+          Name: String,
+          Description: String
+        },
+        Director: {
+          Name: String,
+          Bio: String
+        }
+        Featured: Boolean,
+        ImageUrl: String
+      }
+      <pre>
+      <code>
+     </td>
     </tr>
 
     <tr>
       <td>Return data about a single movie by name to the user</td>
-      <td>/movies/[name]</td>
+      <td>/movies/[title]</td>
       <td>GET</td>
-      <td>:name</td>
+      <td>:title</td>
       <td>None</td>
       <td>A JSON object holding data about the selected movie containing description, genre, director and img URL. Example: 
         <pre>
           <code>
-{
-  name: '', 
-  year: '',
-  genre: {
-    name: '',
-    description: ''
-  } 
-  Director: {
-    name: '', 
-    bio: '',
-    birth: ''
-  },
-  imageURL: {
-
-  }
-  featured: ''
-}
+            {
+              Title: String,
+              Director: String,
+              Stars: [String],
+              Genre: {
+                Name: String,
+                Description: String
+              },
+              Director: {
+                Name: String,
+                Bio: String
+              }
+              Featured: Boolean,
+              ImageUrl: String
+            }
           </code>
         </pre>
       </td>
@@ -92,9 +109,9 @@
         <pre>
           <code>
 { 
-  name: 'Paul Thomas Anderson', 
-  birth: '1970', 
-  bio: 'Anderson was born in 1970. He was one of the first of the "video store" generation of film-makers.'
+  name: String 
+  birth: String 
+}
           </code>
         </pre>
       </td>
@@ -107,35 +124,18 @@
       <td>A JSON object holding data about the user to add. Example: 
         <pre>
           <code>
-{ 
-  "username": "Sara", 
-  "email": "snejat@gmail.com", 
-  "password": "Sn@rt2022!"
-  "birthday": "24/04/1988", 
-  "favorites": [
-    "Licorice Pizza", "Scream"
-  ] 
+{
+  Username: String,
+  (required)
+  Password: String,
+  (required)
+  Email: String,
+  (required)
+  Birthday: Date
 }
           </code>
         </pre>
       </td>
-      <td>A JSON object holding data about added user including ID. Example:
-        <pre>
-          <code>
-{ 
-  id: '1',
-  "username": "Sara", 
-  "email": "snejat@gmail.com", 
-  "password": "Sn@rt2022!"
-  "birthday": "24/04/1988", 
-  "favorites": [
-    "Licorice Pizza", "Scream"
-  ] 
-}
-          </code>
-        </pre>
-      </td>
-    </tr>
     <tr>
       <td>Allow users to update their user info (username)</td>
       <td>/users/[username]</td>
@@ -153,16 +153,13 @@
       <td>A JSON object with the updated user profile. Example:
         <pre>
           <code>
-{ 
-  id: '1',
-  username: 'Mary', 
-  email: 'mary.rahmanpour@gmail.com', 
-  password: 'ihatelemons'
-  birthday: '12/09/1984', 
-  favorites: [
-    'Bee Movie', 'Parent Trap'
-  ] 
-}
+            {
+              Username: String,
+              (required)
+              Password: String,
+              Email: String,
+              Birthday: Date
+            }
           </code>
         </pre>
       </td>
