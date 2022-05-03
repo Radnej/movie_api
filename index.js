@@ -47,10 +47,10 @@ app.get('/movies/:Title', (req, res) => {
 });
 
 //Get a genre
-app.get('/genre/:Name', (req, res) => {
+app.get('/genres/:Name', (req, res) => {
   Movies.findOne({ 'Genre.Name': req.params.Name })
       .then((movie) => {
-          res.json(movie.Genre.Description);
+          res.json(movie.Genre);
       })
       .catch((err) => {
           console.error(err);
@@ -59,7 +59,7 @@ app.get('/genre/:Name', (req, res) => {
 });
 
 // Get a director
-app.get('/director/:Name', (req, res) => {
+app.get('/directors/:Name', (req, res) => {
   Movies.findOne({ 'Director.Name': req.params.Name })
       .then((movie) => {
           res.json(movie.Director);
@@ -137,6 +137,33 @@ app.delete('/users/:Username', (req, res) => {
     .catch((err) => {
       console.error(err);
       res.status(500).send('Error: ' + err);
+    });
+});
+
+//Add a user and register
+app.post('/users', (req, res) => {
+  Users.findOne({ Username: req.body.Username })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.Username + 'already exists');
+      } else {
+        Users
+          .create({
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+          })
+          .then((user) =>{res.status(201).json(user) })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).send('Error: ' + error);
+        })
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
     });
 });
 

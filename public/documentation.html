@@ -32,67 +32,50 @@
       <td>GET</td>
       <td>None</td>
       <td>None</td>
-      <td>Returns JSON Object with a list of all top movies 
-        <pre>
-          <code>
-        Title: String,
-        Director: String,
-        Stars: [String],
-        Genre: {
-          Name: String,
-          Description: String
-        },
-        Director: {
-          Name: String,
-          Bio: String
-        }
-        Featured: Boolean,
-        ImageUrl: String
-      }
-      <pre>
-      <code>
-     </td>
-    </tr>
-
+      <td>A JSON object holding data about all movies </td> 
     <tr>
-      <td>Return data about a single movie by name to the user</td>
-      <td>/movies/[title]</td>
+      <td>Return data about a single movie by title to the user</td>
+      <td>/movies/:Title</td>
       <td>GET</td>
-      <td>:title</td>
+      <td>:Title</td>
       <td>None</td>
       <td>A JSON object holding data about the selected movie containing description, genre, director and img URL. Example: 
         <pre>
           <code>
             {
-              Title: String,
-              Director: String,
-              Stars: [String],
+              Title: '', 
+              Description: '',
+              Year: '', 
               Genre: {
-                Name: String,
-                Description: String
-              },
+                name: '',
+                description: ''
+              } 
               Director: {
-                Name: String,
-                Bio: String
+                name: '', 
+                birth: '',
+                death: '',
+                bio: ''
+              },
+              Actors: {
+          
               }
-              Featured: Boolean,
-              ImageUrl: String
+              ImagePath: ''
             }
           </code>
         </pre>
       </td>
     </tr>
     <tr>
-      <td>Return data about a genre (description) by name/title (e.g., “Thriller”)</td>
-      <td>/movies/geners/[name]</td>
+      <td>Return data about a genre (description) by name (e.g., “Thriller”)</td>
+      <td>genres/:Name</td>
       <td>GET</td>
-      <td>:genre</td>
+      <td>:Genre</td>
       <td>None</td>
       <td>A JSON object holding data about the selected genre. Example:
         <pre>
           <code>
 { 
-  name: 'Comedy', 
+  name: '', 
   description: '', 
 }
           </code>
@@ -101,51 +84,33 @@
     </tr>
     <tr>
       <td>Return data about a director (bio, birth year) by name</td>
-      <td>/movies/directors/[name]</td>
+      <td>/directors/:Name</td>
       <td>GET</td>
-      <td>:name</td>
+      <td>:Name</td>
       <td>None</td>
       <td>A JSON object holding data about the selected director. Example: 
         <pre>
           <code>
 { 
-  name: String 
-  birth: String 
+  name: '',
+  birth: '',
+  death: '',
+  bio:''
 }
           </code>
         </pre>
       </td>
     </tr>
-    <tr>
-      <td>Allow new users to register</td>
-      <td>/users</td>
-      <td>POST</td>
-      <td>None</td>
-      <td>A JSON object holding data about the user to add. Example: 
-        <pre>
-          <code>
-{
-  Username: String,
-  (required)
-  Password: String,
-  (required)
-  Email: String,
-  (required)
-  Birthday: Date
-}
-          </code>
-        </pre>
-      </td>
-    <tr>
+    </tr>
       <td>Allow users to update their user info (username)</td>
-      <td>/users/[username]</td>
+      <td>/users/:Username</td>
       <td>PUT</td>
-      <td>:username</td>
+      <td>:Username</td>
       <td> A JSON object holding the new username. Example:
         <pre>
           <code>
 { 
-  "username": "Mary"
+  "username": ''
 }
           </code>
         </pre>
@@ -154,11 +119,11 @@
         <pre>
           <code>
             {
-              Username: String,
-              (required)
-              Password: String,
-              Email: String,
-              Birthday: Date
+              Username: '',
+              Password: '',
+              Email: '',
+              Birthday: '',
+              favorites:['', '']
             }
           </code>
         </pre>
@@ -166,9 +131,9 @@
     </tr>
     <tr>
       <td>Allow users to add a movie to their list of favorites</td>
-      <td>/users/[username]/[movie]</td>
+      <td>/users/:Username/movies/:MovieID</td>
       <td>POST</td>
-      <td>:username, :movie</td>
+      <td>:Username, :MovieID</td>
       <td>None</td>
       <td>A text message indicating the movie was added</td>
     </tr>
@@ -181,13 +146,43 @@
       <td>A text message indicating the movie was deleted</td>
     </tr>
     <tr>
-      <td>Allow existing users to deregister</td>
-      <td>/users/[username]</td>
-      <td>DELETE</td>
-      <td>:username</td>
+      <td>Allow new users to register</td>
+      <td>/users</td>
+      <td>POST</td>
       <td>None</td>
-      <td>A message indicating the user was deregistered</td>
+      <td>A JSON object holding data about the user to add. Example: 
+        <pre>
+          <code>
+{ 
+  "username": '', 
+  "email": '', 
+  "password": '',
+  "birthday": '', 
+  "favorites": [
+    '', ''
+  ] 
+}
+          </code>
+        </pre>
+      </td>
+      <td>A JSON object holding data about added user including ID. Example:
+        <pre>
+          <code>
+{ 
+  id: '',
+  "username": '', 
+  "email": '', 
+  "password":'',
+  "birthday": '', 
+  "favorites": [
+    '', ''
+  ] 
+}
+          </code>
+        </pre>
+      </td>
     </tr>
+    <tr>
   </tbody>
 </table>
 </body>
