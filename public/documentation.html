@@ -33,6 +33,7 @@
       <td>None</td>
       <td>None</td>
       <td>Array of JSON objects holding data about all movies </td> 
+    </tr>
     <tr>
       <td>Return data about a single movie by title to the user</td>
       <td>/movies/:Title</td>
@@ -101,7 +102,7 @@
         </pre>
       </td>
     </tr>
-    </tr>
+    <tr>
       <td>Allow users to update their user info (username)</td>
       <td>/users/:Username</td>
       <td>PUT</td>
@@ -122,6 +123,7 @@
         <pre>
           <code>
             {
+              -id: "634fh592941u2ed6b91164c9"
               "Username": " ",
               "Password": " ",
               "Email": " ",
@@ -133,30 +135,31 @@
       </td>
     </tr>
     <tr>
-      <td>Allow users to add a movie to their list of FavoriteMovies</td>
+      <td>Allow users to add a movie to their list of FavoriteMovies
       <td>/users/:Username/movies/:MovieID</td>
       <td>POST</td>
       <td>:Username, :MovieID</td>
       <td>None</td>
-      <td>It will return the updated user object containing the added favorite movie</td>
-      <pre>
-        <code>
-          {
-            "_id": "625ff592941e2bd6b91164b9",
-            "Username": "UserName04",
-            "Password": "password0004",
-            "Email": "username05@gmail.com",
-            "Birthday": "1989-08-07T00:00:00.000Z",
-            "FavoriteMovies": [
-                "625fea1c941e2bd6b91164b0",
-                "625fedcc941e2bd6b91164b5",
-                "625feaef941e2bd6b91164b1",
-                "625febc8941e2bd6b91164b2",
-                "625fff38941e2bd6b91164bc"
-            ]
-        }
-        </code>
-      </pre>
+      <td>It will return the updated user object containing the added favorite movie
+        <pre>
+          <code>
+            {
+              "_id": "625ff592941e2bd6b91164b9",
+              "Username": "UserName04",
+              "Password": "password0004",
+              "Email": "username05@gmail.com",
+              "Birthday": "1989-08-07T00:00:00.000Z",
+              "FavoriteMovies": [
+                  "625fea1c941e2bd6b91164b0",
+                  "625fedcc941e2bd6b91164b5",
+                  "625feaef941e2bd6b91164b1",
+                  "625febc8941e2bd6b91164b2",
+                  "625fff38941e2bd6b91164bc"
+              ]
+          }
+          </code>
+        </pre>
+      </td>
     </tr>
     <tr>
       <td>Allow users to remove a movie from their list of favorites</td>
@@ -164,30 +167,43 @@
       <td>DELETE</td>
       <td>:Username, :MovieID</td>
       <td>None</td>
-      <td>It will return the updated user object containing the added favorite movie</td>
-      <pre>
-        <code>
-          {
-            "_id": "625ff592941e2bd6b91164b9",
-            "Username": "UserName04",
-            "Password": "password0004",
-            "Email": "username05@gmail.com",
-            "Birthday": "1989-08-07T00:00:00.000Z",
-            "FavoriteMovies": [
-                "625fea1c941e2bd6b91164b0",
-                "625fedcc941e2bd6b91164b5",
-                "625feaef941e2bd6b91164b1",
-                "625febc8941e2bd6b91164b2"
-            ]
-        } 
-        </code>
-      </pre>
+      <td>It will return the updated user object containing the removed favorite movie
+        <pre>
+          <code>
+            {
+              "_id": "625ff592941e2bd6b91164b9",
+              "Username": "UserName04",
+              "Password": "password0004",
+              "Email": "username05@gmail.com",
+              "Birthday": "1989-08-07T00:00:00.000Z",
+              "FavoriteMovies": [
+                  "625fea1c941e2bd6b91164b0",
+                  "625fedcc941e2bd6b91164b5",
+                  "625feaef941e2bd6b91164b1",
+                  "625febc8941e2bd6b91164b2"
+              ]
+          } 
+          </code>
+        </pre>
+      </td>
     </tr>
     <tr>
       <td>Allow new users to register</td>
       <td>/users</td>
       <td>POST</td>
       <td>None</td>
+      <td>
+        <pre>
+          <code>
+            {
+              "Username": "UserName03",
+              "Password": "password03",
+              "Email": "username01@gmail.com",
+              "Birthday": "1980-10-09T00:00:00.000Z"
+          }
+          </code>
+        </pre>
+      </td>
       <td>A JSON object holding data about the user to add. Example: 
         <pre>
           <code>
