@@ -28,7 +28,7 @@
   <tbody>
     <tr>
       <td>Return a list of ALL movies to the user</td>
-      <td>JWT Bearer token (for the rest)</td>
+      <td>JWT Bearer token</td>
       <td>/movies</td>
       <td>GET</td>
       <td>None</td>
@@ -37,7 +37,7 @@
     </tr>
     <tr>
       <td>Return data about a single movie by title to the user</td>
-      <td>JWT Bearer token (for the rest)</td>
+      <td>JWT Bearer token</td>
       <td>/movies/:Title</td>
       <td>GET</td>
       <td>:Title</td>
@@ -69,8 +69,8 @@
       </td>
     </tr>
     <tr>
-      <td>Return data about a genre (description) by name (e.g., “Thriller”)
-      <td>JWT Bearer token (for the rest)</td>
+      <td>Return data about a genre (description) by name (e.g., “Thriller”)</td>
+      <td>JWT Bearer token</td>
       <td>genres/:Name</td>
       <td>GET</td>
       <td>:Genre</td>
@@ -87,8 +87,8 @@
       </td>
     </tr>
     <tr>
-      <td>Return data about a director (bio, birth year) by name
-      <td>JWT Bearer token (for the rest)</td>
+      <td>Return data about a director (bio, birth year) by name</td>
+      <td>JWT Bearer token</td>
       <td>/directors/:Name</td>
       <td>GET</td>
       <td>:Name</td>
@@ -108,6 +108,7 @@
     </tr>
     <tr>
       <td>Allow users to update their user info (username)</td>
+      <td>JWT Bearer token</td>
       <td>/users/:Username</td>
       <td>PUT</td>
       <td>:Username</td>
@@ -139,8 +140,8 @@
       </td>
     </tr>
     <tr>
-      <td>Allow users to add a movie to their list of FavoriteMovies
-        <td>JWT Bearer token (for the rest)</td>
+      <td>Allow users to add a movie to their list of FavoriteMovies</td>
+      <td>JWT Bearer token</td>
       <td>/users/:Username/movies/:MovieID</td>
       <td>POST</td>
       <td>:Username, :MovieID</td>
@@ -167,8 +168,8 @@
       </td>
     </tr>
     <tr>
-      <td>Allow users to remove a movie from their list of favorites
-      <td>JWT Bearer token (for the rest)</td>
+      <td>Allow users to remove a movie from their list of favorites</td>
+      <td>JWT Bearer token</td>
       <td>/users/:Username/movies/:MovieID</td>
       <td>DELETE</td>
       <td>JWT Bearer token (for the rest)</td>
@@ -196,7 +197,7 @@
     </tr>
     <tr>
       <td>Allow new users to register</td>
-      <td>none (the add new user endpoint)</td>
+      <td>none </td>
       <td>/users</td>
       <td>POST</td>
       <td>None</td>
@@ -230,13 +231,17 @@
 
       <tr>
         <td>Allow a user to login</td>
-        <td>Basic HTTP Authentication with Username and Password (the /login endpoint)</td>
+        <td>Basic HTTP Authentication with Username and Password</td>
         <td>
-            /login<br><br>
-            Params: (Username, Password)    
+            /login<br><br>   
         </td>
         <td>POST</td>
         <td>None</td>
+        <td> Params: (Username, Password) </td>
+        <td>{
+          "Username": "UserName12",
+          "Password": "password12"
+        }</td>
         <td>
             A JSON object holding the users information as well as an assigned JWT<br><br>
             Example:<br>
@@ -252,7 +257,7 @@
                         "FavoriteMovies": [],
                         "__v": 0
                     },
-                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjc1NzlhNmNiNjYxMTVmM2ExNzcxNTEiLCJVc2VybmFtZSI6IlVzZXJOYW1lMTIiLCJQYXNzd29yZCI6InBhc3N3b3JkMTIiLCJFbWFpbCI6InVzZXJuYW1lMTJAZ21haWwuY29tIiwiQmlydGhkYXkiOiIxOTkyLTA0LTExVDAwOjAwOjAwLjAwMFoiLCJGYXZvcml0ZU1vdmllcyI6W10sIl9fdiI6MCwiaWF0IjoxNjUxODY2MDY4LCJleHAiOjE2NTI0NzA4NjgsInN1YiI6IlVzZXJOYW1lMTIifQ.GnBFWDFmmwvJMZ9NKoMO2wdM5r5o6ve0wRh4gmhBQiE"
+                    "token": "eyJhbGciOiJIUzI1NiI....."
                 }
                 </code>
             </pre>
