@@ -18,16 +18,17 @@
   <thead>
     <tr>
       <th scope="col">Business Logic</th>
+      <th scope="col">Authentication</th>
       <th scope="col">URL</th>
       <th scope="col">HTTP Method</th>
       <th scope="col">Query parameters</th>
       <th scope="col">Request body data format</th>
       <th scope="col">Response body data format</th>
-    </tr>
   </thead>
   <tbody>
     <tr>
       <td>Return a list of ALL movies to the user</td>
+      <td>JWT Bearer token (for the rest)</td>
       <td>/movies</td>
       <td>GET</td>
       <td>None</td>
@@ -36,6 +37,7 @@
     </tr>
     <tr>
       <td>Return data about a single movie by title to the user</td>
+      <td>JWT Bearer token (for the rest)</td>
       <td>/movies/:Title</td>
       <td>GET</td>
       <td>:Title</td>
@@ -67,7 +69,8 @@
       </td>
     </tr>
     <tr>
-      <td>Return data about a genre (description) by name (e.g., “Thriller”)</td>
+      <td>Return data about a genre (description) by name (e.g., “Thriller”)
+      <td>JWT Bearer token (for the rest)</td>
       <td>genres/:Name</td>
       <td>GET</td>
       <td>:Genre</td>
@@ -84,7 +87,8 @@
       </td>
     </tr>
     <tr>
-      <td>Return data about a director (bio, birth year) by name</td>
+      <td>Return data about a director (bio, birth year) by name
+      <td>JWT Bearer token (for the rest)</td>
       <td>/directors/:Name</td>
       <td>GET</td>
       <td>:Name</td>
@@ -136,6 +140,7 @@
     </tr>
     <tr>
       <td>Allow users to add a movie to their list of FavoriteMovies
+        <td>JWT Bearer token (for the rest)</td>
       <td>/users/:Username/movies/:MovieID</td>
       <td>POST</td>
       <td>:Username, :MovieID</td>
@@ -162,9 +167,11 @@
       </td>
     </tr>
     <tr>
-      <td>Allow users to remove a movie from their list of favorites</td>
+      <td>Allow users to remove a movie from their list of favorites
+      <td>JWT Bearer token (for the rest)</td>
       <td>/users/:Username/movies/:MovieID</td>
       <td>DELETE</td>
+      <td>JWT Bearer token (for the rest)</td>
       <td>:Username, :MovieID</td>
       <td>None</td>
       <td>It will return the updated user object containing the removed favorite movie
@@ -189,6 +196,7 @@
     </tr>
     <tr>
       <td>Allow new users to register</td>
+      <td>none (the add new user endpoint)</td>
       <td>/users</td>
       <td>POST</td>
       <td>None</td>
@@ -219,6 +227,38 @@
           </code>
         </pre>
       </td>
+
+      <tr>
+        <td>Allow a user to login</td>
+        <td>Basic HTTP Authentication with Username and Password (the /login endpoint)</td>
+        <td>
+            /login<br><br>
+            Params: (Username, Password)    
+        </td>
+        <td>POST</td>
+        <td>None</td>
+        <td>
+            A JSON object holding the users information as well as an assigned JWT<br><br>
+            Example:<br>
+            <pre>
+                <code>
+                  {
+                    "user": {
+                        "_id": "627579a6cb66115f3a177151",
+                        "Username": "UserName12",
+                        "Password": "password12",
+                        "Email": "username12@gmail.com",
+                        "Birthday": "1992-04-11T00:00:00.000Z",
+                        "FavoriteMovies": [],
+                        "__v": 0
+                    },
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjc1NzlhNmNiNjYxMTVmM2ExNzcxNTEiLCJVc2VybmFtZSI6IlVzZXJOYW1lMTIiLCJQYXNzd29yZCI6InBhc3N3b3JkMTIiLCJFbWFpbCI6InVzZXJuYW1lMTJAZ21haWwuY29tIiwiQmlydGhkYXkiOiIxOTkyLTA0LTExVDAwOjAwOjAwLjAwMFoiLCJGYXZvcml0ZU1vdmllcyI6W10sIl9fdiI6MCwiaWF0IjoxNjUxODY2MDY4LCJleHAiOjE2NTI0NzA4NjgsInN1YiI6IlVzZXJOYW1lMTIifQ.GnBFWDFmmwvJMZ9NKoMO2wdM5r5o6ve0wRh4gmhBQiE"
+                }
+                </code>
+            </pre>
+        </td>
+
+    </tr>
   </tbody>
 </table>
 </body>
