@@ -205,7 +205,6 @@ app.post('/users',
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
-  check([field in req.body to validate], [error message if validation fails]).[validation method]();
 });
 
 
