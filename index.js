@@ -1,3 +1,5 @@
+//cors
+const cors = require('cors');
 const express = require('express'),
 bodyParser = require('body-parser'),
 uuid = require('uuid');
@@ -12,11 +14,25 @@ const { check, validationResult } = require('express-validator');
 const Movies = Models.Movie;
 const Users = Models.User;
 
+
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'https://my-flix-220508.herokuapp.com/'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+      let message = 'The CORS policy for this application doesnt allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
+
 //connect to MongoDB
 
-mongoose.connect('mongodb://localhost:27017/myFlixDB', {  
-  useUnifiedTopology: true, 
-});
+ // mongoose.connect('mongodb://localhost:27017/myFlixDB', {  
+ //   useUnifiedTopology: true, 
+ // });
 
 mongoose.connect( process.env.CONNECTION_URI, 
   { useNewUrlParser: true, useUnifiedTopology: true });
@@ -24,9 +40,7 @@ mongoose.connect( process.env.CONNECTION_URI,
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//cors
-const cors = require('cors');
-app.use(cors());
+
 
 // import “auth.js” file
 let auth = require('./auth')(app);
@@ -86,7 +100,14 @@ app.get('/directors/:Name', passport.authenticate('jwt', {session: false}), (req
 });
 
 //Update a user by username
-app.put('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.put('/users/:Username',
+[
+  check('Username', 'Username is required').isLength({min: 5}),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()
+],
+ passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
     {
       Username: req.body.Username,
