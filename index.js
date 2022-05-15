@@ -40,22 +40,19 @@ mongoose.connect( process.env.CONNECTION_URI,
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+app.use(morgan('common'));
 
 // import “auth.js” file
 let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
+
 
 app.get('/', (req, res) => {
 
   res.send('Welcome to my myFlixxxx website');
 
 });
-
-//require the Passport module and import the “passport.js” file
-const passport = require('passport');
-require('./passport');
-
-app.use(morgan('common'));
 
 //Get all movies
 app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
