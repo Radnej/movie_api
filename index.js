@@ -57,10 +57,10 @@ app.get('/', (req, res) => {
 //Get all movies  passport.authenticate('jwt', {session: false}), (req, res) => {
 app.get('/movies', function (req, res) {
   Movies.find()
-  .then((movie) => {
+  .then(function(movie) {
     res.status(201).json(movie);
   })
-  .catch((err) => {
+  .catch(function(err) {
     console.error(err);
     res.status(500).send('Error:' + err);
   });
