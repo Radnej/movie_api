@@ -297,7 +297,7 @@ app.get(
 
 // Get one user
 app.get(
-  "/users/_id",
+  "/users/UserID",
   passport.authenticate("jwt", { session: false }),
   function (req, res) {
     Users.find()
