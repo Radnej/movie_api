@@ -295,16 +295,16 @@ app.get(
   }
 );
 
-// Get one user
+// Get a singel user
 app.get(
-  "/users/UserID",
+  "/users/:UserID",
   passport.authenticate("jwt", { session: false }),
-  function (req, res) {
-    Users.find()
-      .then(function (users) {
-        res.status(201).json(users);
+  (req, res) => {
+    Users.findOne({ UserID: req.params.UserID })
+      .then((users) => {
+        res.json(users);
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.error(err);
         res.status(500).send("Error: " + err);
       });
