@@ -300,7 +300,7 @@ app.get(
   "/users/_id",
   passport.authenticate("jwt", { session: false }),
   function (req, res) {
-    Users.findOne({ _id: req.params._id })
+    Users.find()
       .then(function (users) {
         res.status(201).json(users);
       })
@@ -310,7 +310,6 @@ app.get(
       });
   }
 );
-
 // Error handling (middleware)
 app.use((err, req, res, next) => {
   console.error(err.stack);
