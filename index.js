@@ -295,6 +295,22 @@ app.get(
   }
 );
 
+// Get one user
+app.get(
+  "/users/_id",
+  passport.authenticate("jwt", { session: false }),
+  function (req, res) {
+    Users.findOne({ _id: req.params._id })
+      .then(function (users) {
+        res.status(201).json(users);
+      })
+      .catch(function (err) {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
+
 // Error handling (middleware)
 app.use((err, req, res, next) => {
   console.error(err.stack);
