@@ -295,21 +295,6 @@ app.get(
   }
 );
 
-// Get a singel user
-app.get(
-  "/users/:UserID",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Users.findOne({ UserID: req.params.UserID })
-      .then((users) => {
-        res.json(users);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      });
-  }
-);
 // Error handling (middleware)
 app.use((err, req, res, next) => {
   console.error(err.stack);
