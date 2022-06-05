@@ -299,10 +299,10 @@ app.get(
   "/users/:UserID",
   passport.authenticate("jwt", { session: false }),
   function (req, res) {
-    Users.findOne({{UserID: req.params.UserID}})
-    .then((user) => {
-      res.json(user);
-    })
+    Users.findOne({ UserID: req.params.UserID })
+      .then((user) => {
+        res.json(user);
+      })
       .catch(function (err) {
         console.error(err);
         res.status(500).send("Error: " + err);
