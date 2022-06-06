@@ -295,20 +295,20 @@ app.get(
   }
 );
 // Get a single user
-// app.get(
-//   "/users/:UserID",
-//   passport.authenticate("jwt", { session: false }),
-//   function (req, res) {
-//     Users.findOne({ UserID: req.params.UserID })
-//       .then((user) => {
-//         res.json(user);
-//       })
-//       .catch(function (err) {
-//         console.error(err);
-//         res.status(500).send("Error: " + err);
-//       });
-//   }
-// );
+app.get(
+  "/users/:Username/:UserID",
+  passport.authenticate("jwt", { session: false }),
+  function (req, res) {
+    Users.findOne({ UserID: req.params.UserID })
+      .then((user) => {
+        res.json(UserID);
+      })
+      .catch(function (err) {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 // Error handling (middleware)
 app.use((err, req, res, next) => {
