@@ -296,12 +296,12 @@ app.get(
 );
 // Get a single user
 app.get(
-  "/users/:Username/:UserID",
+  "/users/:Username",
   passport.authenticate("jwt", { session: false }),
   function (req, res) {
-    Users.findOne({ UserID: req.params.UserID })
+    Users.findOne({ Username: req.params.Username })
       .then((user) => {
-        res.json(UserID);
+        res.json(Username);
       })
       .catch(function (err) {
         console.error(err);
