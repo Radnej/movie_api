@@ -299,9 +299,10 @@ app.get(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
   function (req, res) {
+    console.log(req.params.Username);
     Users.findOne({ Username: req.params.Username })
       .then((user) => {
-        res.json(Username);
+        res.json(user);
       })
       .catch(function (err) {
         console.error(err);
