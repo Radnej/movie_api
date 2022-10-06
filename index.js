@@ -20,6 +20,7 @@ let allowedOrigins = [
   "https://my-flix-220508.herokuapp.com/",
   "http://localhost:1234",
   "http://neflixx.netlify.app",
+  "http://localhost:4200",
 ];
 
 app.use(
