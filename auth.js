@@ -24,18 +24,17 @@ let generateJWTToken = (user) => {
 /**
  * Post login
  * @description - Post login
- * @param {URL} - router
- * @param {HTTP} - EXPORTS
- * @param {Query_Parameters} - router
+ * @param {URL} - /login
+ * @param {HTTP} - POST
+ * @param {Query_Parameters} - none
  * @param {Request_Body} - passport
  * @param {Response} - JSON object
  * @example
  * // Response data format
  * {
- *  "message": "Something is not right",
- * "user:user"
+ *  "user": "token",
  * }
- * @param {authentication} - Bearer token (JWT)
+ * @param {authentication} - Bearer token (local)
  * @callback requestCallback
  * @returns {object} - An object with all the information for the singel user
  */

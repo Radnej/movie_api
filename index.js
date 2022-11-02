@@ -192,8 +192,7 @@ app.get(
  * {
  * "Director": {
  * "Name": "Hayao Miyazaki",
- * "Bio": "Hayao Miyazaki is one of Japan greatest animation directors.",
- * "Birth": "1941-01-01"
+ * "Description": "Is a method in which figures are manipulated to appear as moving images."
  * },
  * }
  * @param {authentication} - Bearer token (JWT)
@@ -292,28 +291,22 @@ app.put(
  * @description - Add movie to favorite list of user
  * @param {URL} - /users/:Username/movies/:MovieID
  * @param {HTTP} - POST
- * @param {Query_Parameters} - :Username/movies/:MovieID
+ * @param {Query_Parameters} - :Username,:MovieID
  * @param {Request_Body} - JSON object
  * @example
  * // Request data format
  * {
  *  "Username": "User1",
- *  "FavoriteMovies": [
- *    "qweqwe456456qwe",
- *    "zxczxc789789zxc,
- *  ]
+ *  "MovieID": "zxczxc789789zxc"
  * }
  * @param {Response} - JSON object
  * @example
  * // Response data format
  * {
- *  "_id": "asdasd123123123asd",
  *  "Username": "User1",
- *  "FavoriteMovies": [
- *    "qweqwe456456qwe",
- *    "zxczxc789789zxc,
- *  ]
+ *  "MovieID": "zxczxc789789zxc"
  * }
+ 
  * @param {authentication} - Bearen token (JWT)
  * @callback requestCallback
  * @returns {object} - An object with the user's updated information
@@ -344,27 +337,20 @@ app.post(
  * @description - Delete movie to favorite list of user
  * @param {URL} - /users/:Username/movies/:MovieID
  * @param {HTTP} - POST
- * @param {Query_Parameters} - :Username/movies/:MovieID
+ * @param {Query_Parameters} - :Username/:MovieID
  * @param {Request_Body} - JSON object
  * @example
  * // Request data format
  * {
  *  "Username": "User1",
- *  "FavoriteMovies": [
- *    "qweqwe456456qwe",
- *    "zxczxc789789zxc,
- *  ]
+ *  "MovieID": "zxczxc789789zxc"
  * }
  * @param {Response} - JSON object
  * @example
  * // Response data format
  * {
- *  "_id": "asdasd123123123asd",
  *  "Username": "User1",
- *  "FavoriteMovies": [
- *    "qweqwe456456qwe",
- *    "zxczxc789789zxc,
- *  ]
+ *  "MovieID": "zxczxc789789zxc"
  * }
  * @param {authentication} - Bearen token (JWT)
  * @callback requestCallback
@@ -403,6 +389,12 @@ app.delete(
  * {
  *  "Username": "User1",
  * }
+ * @param {Response} - JSON object
+ * @example
+ * // Response data format
+ * {
+ * "Username": "username1 was deleted"
+ * }
  * @param {authentication} - Bearen token (JWT)
  * @callback requestCallback
  * @returns {object} - Username was not found
@@ -432,7 +424,7 @@ app.delete(
  * @description - Add a new user
  * @param {URL} - /users
  * @param {HTTP} - POST
- * @param {Query_Parameters} - :Users
+ * @param {Query_Parameters} - none
  * @param {Request_Body} - JSON object
  * @example
  * // Request data format
@@ -452,7 +444,7 @@ app.delete(
  *  "Email": "user1@email.com",
  *  "Birthdate": "1990-01-01",
  * }
- * @param {authentication} - Bearen token (JWT)
+ * @param {authentication} - Bearen token (none)
  * @callback requestCallback
  * @returns {object} - An object with the new user including ID, username and mail
  */
@@ -549,7 +541,11 @@ app.get(
  * @example
  * // Response data format
  * {
+ *  "_id": "asdasd123123123asd",
  *  "Username": "User1",
+ *  "Password": "Password1",
+ *  "Email": "user1@email.com",
+ *  "Birthdate": "1990-01-01",
  * }
  * @param {authentication} - Bearer token (JWT)
  * @callback requestCallback
