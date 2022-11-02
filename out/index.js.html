@@ -99,12 +99,16 @@ app.get("/", (req, res) => {
 });
 
 /**
- * Get data of all movies
- * Endpoint: /movies
- * HTTP method: GET
- * @name getAllMovies
- * @returns JSON object holding data of all movies
- * @requires passport
+ * Get a list of all movies
+ * @description - Get a list of all movies
+ * @param {URL} - /movies
+ * @param {HTTP} - GET
+ * @param {Query_Parameters} - none
+ * @param {Request_Body} - none
+ * @param {Response} - array(JSON)
+ * @param {authentication} - Bearer token (JWT)
+ * @callback requestCallback
+ * @returns {array(JSON)} - An array with a list with all the movies in the database
  */
 
 app.get(
@@ -123,12 +127,33 @@ app.get(
 );
 
 /**
- * Get data of a single movie
- * Endpoint: /movies/[movie ID]
- * HTTP method: GET
- * @name getMovie
- * @returns JSON object holding data about a movie containing description, genre, director, image URL
- * @requires passport
+ * Get all the information of the specified movie
+ * @description - Get all the information of the specified movie
+ * @param {URL} - /movies/:Title
+ * @param {HTTP} - GET
+ * @param {Query_Parameters} - :Title
+ * @param {Request_Body} - none
+ * @param {Response} - JSON object
+ * @example
+ * // Response data format
+ * {
+ * "Genre": {
+ * "Name": "Animation",
+ * "Description": "Is a method in which figures are manipulated to appear as moving images."
+ * },
+ * "Director": {
+ * "Name": "Hayao Miyazaki",
+ * "Bio": "Hayao Miyazaki is one of Japan greatest animation directors.",
+ * "Birth": "1941-01-01"
+ * },
+ * "_id": "6356c4e6bf533055da4cae2a",
+ * "Title": "Spirited Away",
+ * "Description": "During her family move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, [...]",
+ * "ImagePath": "https://upload.wikimedia.org/",
+ * }
+ * @param {authentication} - Bearer token (JWT)
+ * @callback requestCallback
+ * @returns {object} - An object with all the information for the movie specified
  */
 
 app.get(
@@ -147,12 +172,24 @@ app.get(
 );
 
 /**
- * Get data of a genre
- * Endpoint: /genres/[genre name]
- * HTTP method: GET
- * @name getGenre
- * @returns JSON object holding data about a genre
- * @requires passport
+ * Get all the information of the movie Genere
+ * @description - Get the information of the movie Genere
+ * @param {URL} - /genres/:Name
+ * @param {HTTP} - GET
+ * @param {Query_Parameters} - :Name
+ * @param {Request_Body} - none
+ * @param {Response} - JSON object
+ * @example
+ * // Response data format
+ * {
+ * "Genre": {
+ * "Name": "Animation",
+ * "Description": "Is a method in which figures are manipulated to appear as moving images."
+ * },
+ * }
+ * @param {authentication} - Bearer token (JWT)
+ * @callback requestCallback
+ * @returns {object} - An object with all the information for the movie Genre specified
  */
 
 app.get(
@@ -171,12 +208,25 @@ app.get(
 );
 
 /**
- * Get data of a director
- * Endpoint: /directors/[name]
- * HTTP method: GET
- * @name getDirector
- * @returns JSON object holding data about a director including bio, birth year, death year
- * @requires passport
+ * Get all the information of the movie director
+ * @description - Get the information of the movie director
+ * @param {URL} - /directors/:Name
+ * @param {HTTP} - GET
+ * @param {Query_Parameters} - :Name
+ * @param {Request_Body} - none
+ * @param {Response} - JSON object
+ * @example
+ * // Response data format
+ * {
+ * "Director": {
+ * "Name": "Hayao Miyazaki",
+ * "Bio": "Hayao Miyazaki is one of Japan greatest animation directors.",
+ * "Birth": "1941-01-01"
+ * },
+ * }
+ * @param {authentication} - Bearer token (JWT)
+ * @callback requestCallback
+ * @returns {object} - An object with all the information for the movie director specified
  */
 
 app.get(
@@ -195,20 +245,37 @@ app.get(
 );
 
 /**
- * Update user data
- * Endpoint: /users/[username]
- * HTTP method: PUT
- * Request body data format: JSON object with the new user infos
- * Expect JSON in this format:
+ * Update the logged in user's information
+ * @description - Update the logged in user's information
+ * @param {URL} - /users/:Username
+ * @param {HTTP} - PUT
+ * @param {Query_Parameters} - :Username
+ * @param {Request_Body} - JSON object
+ * @example
+ * // Request data format
  * {
- *  Username: String, (required)
- *  Password: String, (required)
- *  Email: String, (required)
- *  Birthday: Date
+ *  "Username": "User1",
+ *  "Password": "Password1",
+ *  "Email": "user1@email.com",
+ *  "Birthdate:" "1990-01-01"
  * }
- * @name updateUser
- * @returns JSON object holding the data about the new user
- * @requires passport
+ * @param {Response} - JSON object
+ * @example
+ * // Response data format
+ * {
+ *  "_id": "asdasd123123123asd",
+ *  "Username": "User1",
+ *  "Password": "Password1",
+ *  "Email": "user1@email.com",
+ *  "Birthdate": "1990-01-01",
+ *  "FavoriteMovies": [
+ *    "qweqwe456456qwe",
+ *    "zxczxc789789zxc,
+ *  ]
+ * }
+ * @param {authentication} - Bearen token (JWT)
+ * @callback requestCallback
+ * @returns {object} - An object with the user's updated information
  */
 
 app.put(
@@ -250,11 +317,34 @@ app.put(
 
 /**
  * Add movie to favorite list of user
- * Endpoint: /users/[username]/movies/[movie ID]
- * HTTP method: POST
- * @name addMovieToFavorites
- * @returns JSON object holding the new data about the user
- * @requires passport
+ * @description - Add movie to favorite list of user
+ * @param {URL} - /users/:Username/movies/:MovieID
+ * @param {HTTP} - POST
+ * @param {Query_Parameters} - :Username/movies/:MovieID
+ * @param {Request_Body} - JSON object
+ * @example
+ * // Request data format
+ * {
+ *  "Username": "User1",
+ *  "FavoriteMovies": [
+ *    "qweqwe456456qwe",
+ *    "zxczxc789789zxc,
+ *  ]
+ * }
+ * @param {Response} - JSON object
+ * @example
+ * // Response data format
+ * {
+ *  "_id": "asdasd123123123asd",
+ *  "Username": "User1",
+ *  "FavoriteMovies": [
+ *    "qweqwe456456qwe",
+ *    "zxczxc789789zxc,
+ *  ]
+ * }
+ * @param {authentication} - Bearen token (JWT)
+ * @callback requestCallback
+ * @returns {object} - An object with the user's updated information
  */
 
 app.post(
@@ -278,12 +368,35 @@ app.post(
 );
 
 /**
- * Remove movie from favorite list of user
- * Endpoint: /users/[username]/movies/[movie ID]
- * HTTP method: DELETE
- * @name removeMovieFromFavorites
- * @returns JSON object holding the data about the user without the deleted movie
- * @requires passport
+ * Delete movie to favorite list of user
+ * @description - Delete movie to favorite list of user
+ * @param {URL} - /users/:Username/movies/:MovieID
+ * @param {HTTP} - POST
+ * @param {Query_Parameters} - :Username/movies/:MovieID
+ * @param {Request_Body} - JSON object
+ * @example
+ * // Request data format
+ * {
+ *  "Username": "User1",
+ *  "FavoriteMovies": [
+ *    "qweqwe456456qwe",
+ *    "zxczxc789789zxc,
+ *  ]
+ * }
+ * @param {Response} - JSON object
+ * @example
+ * // Response data format
+ * {
+ *  "_id": "asdasd123123123asd",
+ *  "Username": "User1",
+ *  "FavoriteMovies": [
+ *    "qweqwe456456qwe",
+ *    "zxczxc789789zxc,
+ *  ]
+ * }
+ * @param {authentication} - Bearen token (JWT)
+ * @callback requestCallback
+ * @returns {object} - An object with the user's updated information
  */
 
 app.delete(
@@ -307,12 +420,20 @@ app.delete(
 );
 
 /**
- * Delete user
- * Endpoint: /users/[username]
- * HTTP method: DELETE
- * @name deleteUser
- * @returns {string} text message
- * @requires passport
+ * Delete User
+ * @description - Delete User
+ * @param {URL} - /users/:Username
+ * @param {HTTP} - DELETE
+ * @param {Query_Parameters} - :Username
+ * @param {Request_Body} - JSON object
+ * @example
+ * // Request data format
+ * {
+ *  "Username": "User1",
+ * }
+ * @param {authentication} - Bearen token (JWT)
+ * @callback requestCallback
+ * @returns {object} - Username was not found
  */
 
 app.delete(
@@ -335,20 +456,33 @@ app.delete(
 );
 
 /**
- * Add new user
- * Endpoint: /users
- * HTTP method: POST
- * Request body data format: JSON object holding data about the new user including username and mail
- * Expect JSON in this format:
+ * Add a new user
+ * @description - Add a new user
+ * @param {URL} - /users
+ * @param {HTTP} - POST
+ * @param {Query_Parameters} - :Users
+ * @param {Request_Body} - JSON object
+ * @example
+ * // Request data format
  * {
- *  ID: Integer,
- *  Username: String, (required)
- *  Password: String, (required)
- *  Email: String, (required)
- *  Birthday: Date
+ *  "Username": "User1",
+ *  "Password": "Password1",
+ *  "Email": "user1@email.com",
+ *  "Birthdate:" "1990-01-01"
  * }
- * @get addUser
- * @returns JSON object holding data about the new user including ID, username and mail
+ * @param {Response} - JSON object
+ * @example
+ * // Response data format
+ * {
+ *  "_id": "asdasd123123123asd",
+ *  "Username": "User1",
+ *  "Password": "Password1",
+ *  "Email": "user1@email.com",
+ *  "Birthdate": "1990-01-01",
+ * }
+ * @param {authentication} - Bearen token (JWT)
+ * @callback requestCallback
+ * @returns {object} - An object with the new user including ID, username and mail
  */
 
 app.post(
@@ -405,13 +539,18 @@ app.post(
 );
 
 /**
- * Get data of a single user
- * Endpoint: /users
- * HTTP method: GET
- * @name getUser
- * @returns JSON object holding the data about all users
- * @requires passport
+ * Get all users
+ * @description - Get all users
+ * @param {URL} - /users
+ * @param {HTTP} - GET
+ * @param {Query_Parameters} - none
+ * @param {Request_Body} - none
+ * @param {Response} - array(JSON)
+ * @param {authentication} - Bearer token (JWT)
+ * @callback requestCallback
+ * @returns {array(JSON)} - An array with a list with all the users in the database
  */
+
 app.get(
   "/users",
   passport.authenticate("jwt", { session: false }),
@@ -428,12 +567,21 @@ app.get(
 );
 
 /**
- * Get data of a single user
- * Endpoint: /users/[username]
- * HTTP method: GET
- * @name getUser
- * @returns JSON object holding the data about the user
- * @requires passport
+ * Get all the information of the singel user
+ * @description - Get all the information of the singel user
+ * @param {URL} - /users/:Username
+ * @param {HTTP} - GET
+ * @param {Query_Parameters} - :Username
+ * @param {Request_Body} - none
+ * @param {Response} - JSON object
+ * @example
+ * // Response data format
+ * {
+ *  "Username": "User1",
+ * }
+ * @param {authentication} - Bearer token (JWT)
+ * @callback requestCallback
+ * @returns {object} - An object with all the information for the singel user
  */
 app.get(
   "/users/:Username",
@@ -475,13 +623,13 @@ app.listen(port, "0.0.0.0", () => {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addMovieToFavorites">addMovieToFavorites</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#getAllMovies">getAllMovies</a></li><li><a href="global.html#getDirector">getDirector</a></li><li><a href="global.html#getGenre">getGenre</a></li><li><a href="global.html#getMovie">getMovie</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#removeMovieFromFavorites">removeMovieFromFavorites</a></li><li><a href="global.html#updateUser">updateUser</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Sun Oct 30 2022 17:38:15 GMT+0100 (Central European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Wed Nov 02 2022 16:01:32 GMT+0100 (Central European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
