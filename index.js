@@ -189,12 +189,12 @@ app.get(
  * @param {Response} - JSON object
  * @example
  * // Response data format
- * {
- * "Director": {
- * "Name": "Hayao Miyazaki",
- * "Description": "Is a method in which figures are manipulated to appear as moving images."
- * },
- * }
+ {
+              "Name": "",
+              "Bio": "",
+              "Birth": "Date",
+              "Death": "Date"
+          }
  * @param {authentication} - Bearer token (JWT)
  * @callback requestCallback
  * @returns {object} - An object with all the information for the movie director specified
@@ -292,20 +292,23 @@ app.put(
  * @param {URL} - /users/:Username/movies/:MovieID
  * @param {HTTP} - POST
  * @param {Query_Parameters} - :Username,:MovieID
- * @param {Request_Body} - JSON object
- * @example
- * // Request data format
- * {
- *  "Username": "User1",
- *  "MovieID": "zxczxc789789zxc"
- * }
+ * @param {Request_Body} - None
  * @param {Response} - JSON object
  * @example
  * // Response data format
- * {
- *  "Username": "User1",
- *  "MovieID": "zxczxc789789zxc"
- * }
+ *  {
+ *    "_id": "625ff592941e2bd6b91164b9",
+ *            "Username": "UserName04",
+ *            "Password": "password0004",
+*             "Email": "username05@gmail.com",
+*             "Birthday": "1989-08-07T00:00:00.000Z",
+*              "FavoriteMovies": [
+*                 "625fea1c941e2bd6b91164b0",
+*                 "625fedcc941e2bd6b91164b5",
+*                 "625feaef941e2bd6b91164b1",
+*                 "625febc8941e2bd6b91164b2"
+*      ]
+*     } 
  
  * @param {authentication} - Bearen token (JWT)
  * @callback requestCallback
@@ -338,20 +341,23 @@ app.post(
  * @param {URL} - /users/:Username/movies/:MovieID
  * @param {HTTP} - POST
  * @param {Query_Parameters} - :Username/:MovieID
- * @param {Request_Body} - JSON object
- * @example
- * // Request data format
- * {
- *  "Username": "User1",
- *  "MovieID": "zxczxc789789zxc"
- * }
+ * @param {Request_Body} - None
  * @param {Response} - JSON object
  * @example
  * // Response data format
- * {
- *  "Username": "User1",
- *  "MovieID": "zxczxc789789zxc"
- * }
+ *  {
+ *    "_id": "625ff592941e2bd6b91164b9",
+ *            "Username": "UserName04",
+ *            "Password": "password0004",
+ *             "Email": "username05@gmail.com",
+ *             "Birthday": "1989-08-07T00:00:00.000Z",
+ *              "FavoriteMovies": [
+ *                 "625fea1c941e2bd6b91164b0",
+ *                 "625fedcc941e2bd6b91164b5",
+ *                 "625feaef941e2bd6b91164b1",
+ *                 "625febc8941e2bd6b91164b2"
+ *      ]
+ *     }
  * @param {authentication} - Bearen token (JWT)
  * @callback requestCallback
  * @returns {object} - An object with the user's updated information
@@ -382,18 +388,13 @@ app.delete(
  * @description - Delete User
  * @param {URL} - /users/:Username
  * @param {HTTP} - DELETE
- * @param {Query_Parameters} - :Username
- * @param {Request_Body} - JSON object
- * @example
- * // Request data format
- * {
- *  "Username": "User1",
- * }
- * @param {Response} - JSON object
+ * @param {Query_Parameters} - None
+ * @param {Request_Body} - None
+ * @param {Response} - Text
  * @example
  * // Response data format
  * {
- * "Username": "username1 was deleted"
+ * "username was deleted"
  * }
  * @param {authentication} - Bearen token (JWT)
  * @callback requestCallback
@@ -443,8 +444,11 @@ app.delete(
  *  "Password": "Password1",
  *  "Email": "user1@email.com",
  *  "Birthdate": "1990-01-01",
+ *  "FavoriteMovies": [],
+ * "_id": "62717b5042647674c1029de0",
+ * "__v": 0
  * }
- * @param {authentication} - Bearen token (none)
+ * @param {authentication} - None
  * @callback requestCallback
  * @returns {object} - An object with the new user including ID, username and mail
  */
@@ -540,12 +544,16 @@ app.get(
  * @param {Response} - JSON object
  * @example
  * // Response data format
+ * // Response data format
  * {
  *  "_id": "asdasd123123123asd",
  *  "Username": "User1",
  *  "Password": "Password1",
  *  "Email": "user1@email.com",
  *  "Birthdate": "1990-01-01",
+ *  "FavoriteMovies": [],
+ * "_id": "62717b5042647674c1029de0",
+ * "__v": 0
  * }
  * @param {authentication} - Bearer token (JWT)
  * @callback requestCallback

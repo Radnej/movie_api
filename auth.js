@@ -26,14 +26,30 @@ let generateJWTToken = (user) => {
  * @description - Post login
  * @param {URL} - /login
  * @param {HTTP} - POST
- * @param {Query_Parameters} - none
- * @param {Request_Body} - passport
+ * @param {Query_Parameters} - (Username, Password)
+ * @param {Request_Body} - JSON object
+ * @example
+ * // Response data format
+ * { 
+*   "Username": "UserName12",
+ *   "Password": "password12"
+ * }
+
  * @param {Response} - JSON object
  * @example
  * // Response data format
  * {
- *  "user": "token",
- * }
+*   "user": {
+*             "_id": "627579a6cb66115f3a177151",
+*             "Username": "UserName12",
+*             "Password": "password12",
+*             "Email": "username12@gmail.com",
+*             "Birthday": "1992-04-11T00:00:00.000Z",
+*             "FavoriteMovies": [],
+*             "__v": 0
+*             },
+*             "token": "eyJhbGciOiJIUzI1NiI....."
+*            }
  * @param {authentication} - Bearer token (local)
  * @callback requestCallback
  * @returns {object} - An object with all the information for the singel user
