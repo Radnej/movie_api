@@ -31,7 +31,7 @@ let generateJWTToken = (user) => {
  * @example
  * // Response data format
  * { 
-*   "Username": "UserName12",
+ *    "Username": "UserName12",
  *   "Password": "password12"
  * }
 
@@ -39,20 +39,20 @@ let generateJWTToken = (user) => {
  * @example
  * // Response data format
  * {
-*   "user": {
-*             "_id": "627579a6cb66115f3a177151",
-*             "Username": "UserName12",
-*             "Password": "password12",
-*             "Email": "username12@gmail.com",
-*             "Birthday": "1992-04-11T00:00:00.000Z",
-*             "FavoriteMovies": [],
-*             "__v": 0
-*             },
-*             "token": "eyJhbGciOiJIUzI1NiI....."
-*            }
+ *   "user": {
+ *             "_id": "627579a6cb66115f3a177151",
+ *             "Username": "UserName12",
+ *             "Password": "password12",
+ *             "Email": "username12@gmail.com",
+ *             "Birthday": "1992-04-11T00:00:00.000Z",
+ *             "FavoriteMovies": [],
+ *             "__v": 0
+ *             },
+ *             "token": "eyJhbGciOiJIUzI1NiI....."
+ *            }
  * @param {authentication} - Bearer token (local)
  * @callback requestCallback
- * @returns {object} - An object with all the information for the singel user
+ * @returns {object} - An object with all the information for the singel user append "as well as JWT token"
  */
 
 module.exports = (router) => {

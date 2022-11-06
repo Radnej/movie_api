@@ -154,10 +154,8 @@ app.get(
  * @example
  * // Response data format
  * {
- * "Genre": {
  * "Name": "Animation",
  * "Description": "Is a method in which figures are manipulated to appear as moving images."
- * },
  * }
  * @param {authentication} - Bearer token (JWT)
  * @callback requestCallback
@@ -189,12 +187,12 @@ app.get(
  * @param {Response} - JSON object
  * @example
  * // Response data format
- {
-              "Name": "",
-              "Bio": "",
-              "Birth": "Date",
-              "Death": "Date"
-          }
+ * {
+ *  "Name": "",
+ *  "Bio": "",
+ *  "Birth": "Date",
+ *  "Death": "Date"
+ *  }
  * @param {authentication} - Bearer token (JWT)
  * @callback requestCallback
  * @returns {object} - An object with all the information for the movie director specified
@@ -296,20 +294,19 @@ app.put(
  * @param {Response} - JSON object
  * @example
  * // Response data format
- *  {
- *    "_id": "625ff592941e2bd6b91164b9",
- *            "Username": "UserName04",
- *            "Password": "password0004",
-*             "Email": "username05@gmail.com",
-*             "Birthday": "1989-08-07T00:00:00.000Z",
-*              "FavoriteMovies": [
-*                 "625fea1c941e2bd6b91164b0",
-*                 "625fedcc941e2bd6b91164b5",
-*                 "625feaef941e2bd6b91164b1",
-*                 "625febc8941e2bd6b91164b2"
-*      ]
-*     } 
- 
+ * {
+ *  "_id": "625ff592941e2bd6b91164b9",
+ *  "Username": "UserName04",
+ *  "Password": "password0004",
+ *  "Email": "username05@gmail.com",
+ *  "Birthday": "1989-08-07T00:00:00.000Z",
+ *  "FavoriteMovies": [
+ *   "625fea1c941e2bd6b91164b0",
+ *   "625fedcc941e2bd6b91164b5",
+ *   "625feaef941e2bd6b91164b1",
+ *   "625febc8941e2bd6b91164b2"
+ *  ]
+ * }
  * @param {authentication} - Bearen token (JWT)
  * @callback requestCallback
  * @returns {object} - An object with the user's updated information
@@ -345,19 +342,19 @@ app.post(
  * @param {Response} - JSON object
  * @example
  * // Response data format
- *  {
- *    "_id": "625ff592941e2bd6b91164b9",
- *            "Username": "UserName04",
- *            "Password": "password0004",
- *             "Email": "username05@gmail.com",
- *             "Birthday": "1989-08-07T00:00:00.000Z",
- *              "FavoriteMovies": [
- *                 "625fea1c941e2bd6b91164b0",
- *                 "625fedcc941e2bd6b91164b5",
- *                 "625feaef941e2bd6b91164b1",
- *                 "625febc8941e2bd6b91164b2"
- *      ]
- *     }
+ * {
+ *  "_id": "625ff592941e2bd6b91164b9",
+ *  "Username": "UserName04",
+ *  "Password": "password0004",
+ *  "Email": "username05@gmail.com",
+ *  "Birthday": "1989-08-07T00:00:00.000Z",
+ *  "FavoriteMovies": [
+ *   "625fea1c941e2bd6b91164b0",
+ *   "625fedcc941e2bd6b91164b5",
+ *   "625feaef941e2bd6b91164b1",
+ *   "625febc8941e2bd6b91164b2"
+ *  ]
+ * }
  * @param {authentication} - Bearen token (JWT)
  * @callback requestCallback
  * @returns {object} - An object with the user's updated information
@@ -393,12 +390,10 @@ app.delete(
  * @param {Response} - Text
  * @example
  * // Response data format
- * {
  * "username was deleted"
- * }
  * @param {authentication} - Bearen token (JWT)
  * @callback requestCallback
- * @returns {object} - Username was not found
+ * @returns {string} - a text indicating wether the user is deleted or not
  */
 
 app.delete(
@@ -552,8 +547,8 @@ app.get(
  *  "Email": "user1@email.com",
  *  "Birthdate": "1990-01-01",
  *  "FavoriteMovies": [],
- * "_id": "62717b5042647674c1029de0",
- * "__v": 0
+ *  "_id": "62717b5042647674c1029de0",
+ *  "__v": 0
  * }
  * @param {authentication} - Bearer token (JWT)
  * @callback requestCallback
