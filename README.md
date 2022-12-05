@@ -28,6 +28,10 @@ The endpoints of the API can be accessed with HTTP methods (POST, GET, PUT, and 
 
 ## Endpoints
 
+
+
+## Endpoints
+
 ### Get data of all movies
 
 <strong>Endpoint:</strong> `/movies`
