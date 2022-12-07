@@ -42,15 +42,17 @@ To see a documentation of the endpoints open [this link](https://my-flix-220508.
 ```bash
 git clone https://github.com/Radnej/movie_api
 ```
-2. Install the depedencies
+2. Install the depedencies mentioned in package.json
 ```bash
 $ npm install
 ```
-3. start the development server
+3. start the server
 ```bash
-$ npm run dev
+$ npm run start
 ```
 #### Access the app on http://localhost:8080
+
+Note: Please make sure you install latest version of Node.js! 
 
 ## Endpoints
 
