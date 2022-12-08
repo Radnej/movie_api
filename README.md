@@ -10,7 +10,7 @@ The endpoints of the API can be accessed with HTTP methods (POST, GET, PUT, and 
 ## Demo
 To see a documentation of the endpoints open [this link](https://my-flix-220508.herokuapp.com/documentation.html) 
 
-## Built With
+## Technologies Used
 
 - Node.js
 - Express
@@ -46,7 +46,7 @@ git clone https://github.com/Radnej/movie_api
 ```bash
 $ npm install
 ```
-3. start the server
+3. Start the server
 ```bash
 $ npm run start
 ```
